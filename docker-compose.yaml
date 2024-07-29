@@ -1,0 +1,22 @@
+version: '3.5'
+
+networks:
+  backend:
+    driver: bridge
+    internal: false
+    
+services:
+  db:
+    image: mysql:8
+    container_name: mysql_8
+    restart: always
+    ports:
+      - "3300:3306"
+    volumes:
+      - ./mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    labels:
+      traefik.enbale: "false"
+    networks:
+      - backend
